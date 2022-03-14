@@ -5,3 +5,7 @@ spring:
     url: jdbc:postgresql://localhost:54321/unitech
     username: unitech
     password: unitech
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
