@@ -6,6 +6,15 @@ spring:
     username: unitech
     password: unitech
 
+server:
+  servlet:
+    context-path: /api
+
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
+
+ferhad:
+  app:
+    jwtSecret: gSjOhVwYHmb5rOhn10Cqus5MK8BNUr6QJhWH9TL2RuFmsdi51dOXF6BEQx39jGB
+    jwtExpirationMs: 86400000
