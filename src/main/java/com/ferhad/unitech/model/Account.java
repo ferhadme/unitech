@@ -19,8 +19,8 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private String accountNumber;
     private BigDecimal amount;
-
     private Boolean active;
 
     @ManyToOne

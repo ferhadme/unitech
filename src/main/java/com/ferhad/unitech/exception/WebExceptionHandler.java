@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -61,6 +62,15 @@ public class WebExceptionHandler {
     protected ResponseEntity<MessageResponse> handle(TransferToSameAccount ex) {
         log.error("Error happened: {}", ex.getMessage());
         MessageResponse messageResponse = new MessageResponse("Transfer to the same account");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(messageResponse);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    protected ResponseEntity<MessageResponse> handle(MethodArgumentNotValidException ex) {
+        log.error("Error happened: {}", ex.getMessage());
+        MessageResponse messageResponse = new MessageResponse("Field errors");
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(messageResponse);
