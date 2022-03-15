@@ -1,9 +1,11 @@
 package com.ferhad.unitech.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,12 +20,12 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "users")
 @Data
+@Table(name = "users", schema = "public")
+@AllArgsConstructor
 @RequiredArgsConstructor
 @Builder
 public class User {
@@ -33,7 +35,7 @@ public class User {
 
     @NotBlank
     @Pattern(regexp = "^\\w{7}$",
-            message = "Password should contain minimum eight characters, at least one letter and one number")
+            message = "Pin should consists of 7 characters")
     @Column(unique = true)
     private String pin;
 
@@ -41,12 +43,12 @@ public class User {
     @Size(max = 120, message = "Password couldn't be larger than 120 characters")
     private String password;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Account> accounts;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
+    private Set<Role> roles;
 }

@@ -1,5 +1,6 @@
 package com.ferhad.unitech.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "roles")
 @Data
+@AllArgsConstructor
 @RequiredArgsConstructor
 @Builder
 public class Role {

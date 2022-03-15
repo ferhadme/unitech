@@ -2,13 +2,16 @@ spring:
   application:
     name: account-service
   datasource:
-    url: jdbc:postgresql://localhost:54321/unitech
+    url: jdbc:postgresql://localhost:54322/unitech
     username: unitech
     password: unitech
+  jpa:
+    hibernate:
+      ddl-auto: update
 
-server:
-  servlet:
-    context-path: /api
+#server:
+#  servlet:
+#    context-path: /api
 
 springdoc:
   swagger-ui:

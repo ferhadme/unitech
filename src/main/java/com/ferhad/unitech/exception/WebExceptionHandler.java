@@ -15,7 +15,6 @@ public class WebExceptionHandler {
 
     @ExceptionHandler(BadCredentials.class)
     protected ResponseEntity<MessageResponse> handle(BadCredentials ex) {
-        log.error("Error happened: {}", ex.getMessage());
         MessageResponse messageResponse = new MessageResponse("Wrong credentials for login");
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -24,7 +23,6 @@ public class WebExceptionHandler {
 
     @ExceptionHandler(DuplicatePinException.class)
     protected ResponseEntity<MessageResponse> handle(DuplicatePinException ex) {
-        log.error("Error happened: {}", ex.getMessage());
         MessageResponse messageResponse = new MessageResponse("Registering with already registered PIN");
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -33,8 +31,15 @@ public class WebExceptionHandler {
 
     @ExceptionHandler(NotEnoughMoney.class)
     protected ResponseEntity<MessageResponse> handle(NotEnoughMoney ex) {
-        log.error("Error happened: {}", ex.getMessage());
         MessageResponse messageResponse = new MessageResponse("No enough money in account for transaction");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(messageResponse);
+    }
+
+    @ExceptionHandler(TransferFromDeactiveAccount.class)
+    protected ResponseEntity<MessageResponse> handle(TransferFromDeactiveAccount ex) {
+        MessageResponse messageResponse = new MessageResponse("Transfer from deactivated account");
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(messageResponse);
@@ -42,7 +47,6 @@ public class WebExceptionHandler {
 
     @ExceptionHandler(TransferToDeactiveAccount.class)
     protected ResponseEntity<MessageResponse> handle(TransferToDeactiveAccount ex) {
-        log.error("Error happened: {}", ex.getMessage());
         MessageResponse messageResponse = new MessageResponse("Transfer to deactivated account");
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -51,7 +55,6 @@ public class WebExceptionHandler {
 
     @ExceptionHandler(TransferToNonExistentAccount.class)
     protected ResponseEntity<MessageResponse> handle(TransferToNonExistentAccount ex) {
-        log.error("Error happened: {}", ex.getMessage());
         MessageResponse messageResponse = new MessageResponse("Transfer to non existent account");
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -60,7 +63,6 @@ public class WebExceptionHandler {
 
     @ExceptionHandler(TransferToSameAccount.class)
     protected ResponseEntity<MessageResponse> handle(TransferToSameAccount ex) {
-        log.error("Error happened: {}", ex.getMessage());
         MessageResponse messageResponse = new MessageResponse("Transfer to the same account");
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -69,8 +71,7 @@ public class WebExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     protected ResponseEntity<MessageResponse> handle(MethodArgumentNotValidException ex) {
-        log.error("Error happened: {}", ex.getMessage());
-        MessageResponse messageResponse = new MessageResponse("Field errors");
+        MessageResponse messageResponse = new MessageResponse(ex.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(messageResponse);
