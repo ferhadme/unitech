@@ -4,20 +4,19 @@ import com.ferhad.unitech.exception.DuplicatePinException;
 import com.ferhad.unitech.model.User;
 import com.ferhad.unitech.payload.request.SignupRequest;
 import com.ferhad.unitech.repository.UserRepository;
+import com.ferhad.unitech.security.jwt.JwtUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doReturn;
 
 @SpringBootTest
 public class AuthServiceTest {

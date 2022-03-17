@@ -4,6 +4,7 @@ import com.ferhad.unitech.model.ExchangeRate;
 import com.ferhad.unitech.repository.ExchangeRateRepository;
 import com.ferhad.unitech.service.CurrencyRateProvider;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import java.util.Currency;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class FakeCurrencyRateProvider implements CurrencyRateProvider {
     private final ExchangeRateRepository exchangeRateRepository;
 
@@ -36,6 +38,8 @@ public class FakeCurrencyRateProvider implements CurrencyRateProvider {
         exchangeRateRepository.save(tlToUsd);
         ExchangeRate tlToAzn = generateExchangeRate(tl, azn, 0.1, 0.2);
         exchangeRateRepository.save(tlToAzn);
+
+        log.info("Exchange Rates are reloaded");
     }
 
     private ExchangeRate generateExchangeRate(Currency source, Currency target, Double min, Double max) {
