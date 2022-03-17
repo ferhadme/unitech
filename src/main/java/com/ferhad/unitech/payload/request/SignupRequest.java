@@ -1,11 +1,13 @@
 package com.ferhad.unitech.payload.request;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 @Data
+@Builder
 public class SignupRequest {
     @NotBlank
     @Pattern(regexp = "^\\w{7}$",

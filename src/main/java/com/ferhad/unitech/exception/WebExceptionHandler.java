@@ -79,7 +79,7 @@ public class WebExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     protected ResponseEntity<MessageResponse> handle(MethodArgumentNotValidException ex) {
-        MessageResponse messageResponse = new MessageResponse(ex.getMessage());
+        MessageResponse messageResponse = new MessageResponse("Field Error");
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(messageResponse);

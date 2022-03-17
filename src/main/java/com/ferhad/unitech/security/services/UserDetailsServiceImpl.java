@@ -2,6 +2,7 @@ package com.ferhad.unitech.security.services;
 
 import com.ferhad.unitech.model.User;
 import com.ferhad.unitech.repository.UserRepository;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

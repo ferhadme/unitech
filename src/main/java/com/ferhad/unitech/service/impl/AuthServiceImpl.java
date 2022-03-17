@@ -55,7 +55,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public void register(SignupRequest request) {
+    public User register(SignupRequest request) {
         if (userRepository.existsByPin(request.getPin())) {
             throw new DuplicatePinException();
         }
@@ -70,7 +70,7 @@ public class AuthServiceImpl implements AuthService {
                 .build();
         Set<Role> roles = new HashSet<>(List.of(defaultRole));
         user.setRoles(roles);
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
 }
