@@ -1,7 +1,7 @@
 # Getting Started
 
 ### Running
-Application uses PostgreSql for database management system. Image is available through docker-compose
+Application uses PostgreSQL for database management system. Image is available through docker-compose
 
 ```sh
 $ sudo docker-compose up
