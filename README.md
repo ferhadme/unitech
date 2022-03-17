@@ -1,7 +1,5 @@
 # Getting Started
 
-### Prerequisites
-
 ### Running
 Application uses PostgreSql for database management system. Image is available through docker-compose
 
@@ -13,4 +11,4 @@ $ sudo docker-compose up
 $ gradle bootRun
 ```
 
-[localhost:8080/swagger-ui/index.html](Swagger UI is available under localhost:8080/swagger-ui/index.html)
+[Swagger UI is available under localhost:8080/swagger-ui/index.html](localhost:8080/swagger-ui/index.html)
