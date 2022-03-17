@@ -6,10 +6,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@ControllerAdvice
+@RestControllerAdvice
 @Slf4j
 public class WebExceptionHandler {
 
@@ -64,6 +64,14 @@ public class WebExceptionHandler {
     @ExceptionHandler(TransferToSameAccount.class)
     protected ResponseEntity<MessageResponse> handle(TransferToSameAccount ex) {
         MessageResponse messageResponse = new MessageResponse("Transfer to the same account");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(messageResponse);
+    }
+
+    @ExceptionHandler(NoSuchCurrencyCode.class)
+    protected ResponseEntity<MessageResponse> handle(NoSuchCurrencyCode ex) {
+        MessageResponse messageResponse = new MessageResponse("No such currency code");
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(messageResponse);

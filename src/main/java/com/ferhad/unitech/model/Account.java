@@ -1,6 +1,5 @@
 package com.ferhad.unitech.model;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,7 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotBlank;
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -21,18 +23,22 @@ import java.util.Objects;
 @Setter
 public class Account {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "account_sequence", sequenceName = "accountSeq")
     private Long id;
 
     @Column(unique = true)
+    @NotBlank
     private String accountNumber;
 
+    @DecimalMin(value = "0.0", inclusive = false)
     private BigDecimal amount;
-    private Boolean active;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    private Boolean active;
 
     @Override
     public boolean equals(Object o) {

@@ -4,6 +4,8 @@ import com.ferhad.unitech.dto.AccountGetDto;
 import com.ferhad.unitech.dto.TransferDto;
 import com.ferhad.unitech.payload.response.MessageResponse;
 import com.ferhad.unitech.service.AccountService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,6 +26,7 @@ import java.util.List;
 public class AccountController {
     private final AccountService accountService;
 
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     @PostMapping("/transfer")
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<MessageResponse> makeTransfer(Principal principal, @RequestBody TransferDto transferDto) {
@@ -32,6 +35,7 @@ public class AccountController {
         return ResponseEntity.ok(messageResponse);
     }
 
+    @Operation(security = { @SecurityRequirement(name = "bearer-key") })
     @GetMapping
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<List<AccountGetDto>> getAccounts(Principal principal) {

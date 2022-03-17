@@ -1,32 +1,35 @@
 package com.ferhad.unitech.model;
 
-import com.ferhad.unitech.model.enums.ERole;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMin;
+import java.math.BigDecimal;
+import java.util.Currency;
 
 @Entity
-@Table(name = "roles")
+@Table(name = "exchange_rate")
 @Data
+@Builder
 @AllArgsConstructor
 @RequiredArgsConstructor
-@Builder
-public class Role {
+public class ExchangeRate {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "role_sequence", sequenceName = "roleSeq")
+    @SequenceGenerator(name = "exchange_rate_sequence", sequenceName = "exchangeRateSeq")
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private ERole name;
+    private Currency source;
+    private Currency target;
+
+    @DecimalMin(value = "0.0", inclusive = false)
+    private BigDecimal rate;
 }

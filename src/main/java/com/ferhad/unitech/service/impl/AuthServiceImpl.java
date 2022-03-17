@@ -1,7 +1,7 @@
 package com.ferhad.unitech.service.impl;
 
 import com.ferhad.unitech.exception.DuplicatePinException;
-import com.ferhad.unitech.model.ERole;
+import com.ferhad.unitech.model.enums.ERole;
 import com.ferhad.unitech.model.Role;
 import com.ferhad.unitech.model.User;
 import com.ferhad.unitech.payload.request.LoginRequest;
