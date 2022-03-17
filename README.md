@@ -11,4 +11,4 @@ $ sudo docker-compose up
 $ gradle bootRun
 ```
 
-[Swagger UI is available under localhost:8080/swagger-ui/index.html](localhost:8080/swagger-ui/index.html)
+[Swagger UI is available under localhost:8080/swagger-ui/index.html](https://localhost:8080/swagger-ui/index.html)
